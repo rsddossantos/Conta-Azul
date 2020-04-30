@@ -3,7 +3,6 @@ class permissionsController extends controller {
 
     public function __construct() {
         //parent::__construct();
-
         $u = new Users();
         if($u->isLogged() == false) {
             header("Location: ".BASE_URL."/login");
@@ -22,10 +21,39 @@ class permissionsController extends controller {
             $permissions = new Permissions();
             $data['permissions_list'] = $permissions->getList($u->getCompany());
             $data['permissions_groups_list'] = $permissions->getGroupList($u->getCompany());
+            $data['menu'] = $this->disableMenu();
             $this->loadTemplate('permissions', $data);
         } else {
             header("Location: ".BASE_URL);
         }
+    }
+
+    /*
+     * Método que irá desabilitar os menus de acordo com as permissões
+     * Esse método deverá ser chamado em toda Action que carregar View
+     * Menu Permissões >> permissions_view >> ID=2
+     * Menu Usuários >> users_disabled >> ID=32
+     */
+    public function disableMenu() {
+        $data = array();
+        $u = new Users();
+        $u->setLoggedUser();
+        $permissions = array('permissions_view','users_view');
+        foreach ($permissions as $permission) {
+            if($u->hasPermission($permission)) {
+                continue;
+            } else {
+                switch($permission) {
+                    case 'permissions_view':
+                        $data['permissions_disabled'] = 'disabled';
+                        break;
+                    case 'users_view':
+                        $data['users_disabled'] = 'disabled';
+                        break;
+                }
+            }
+        }
+        return $data;
     }
 
     public function add() {
@@ -64,6 +92,7 @@ class permissionsController extends controller {
                 header("Location: ".BASE_URL."/permissions");
             }
             $data['permissions_list'] = $permissions->getList($u->getCompany());
+            $data['menu'] = $this->disableMenu();
             $this->loadTemplate('permissions_addgroup', $data);
         } else {
             header("Location: ".BASE_URL);
@@ -126,6 +155,7 @@ class permissionsController extends controller {
             }
             $data['permissions_list'] = $permissions->getList($u->getCompany());
             $data['group_info'] = $permissions->getGroup($id, $u->getCompany());
+            $data['menu'] = $this->disableMenu();
             $this->loadTemplate('permissions_editgroup', $data);
         } else {
             header("Location: ".BASE_URL);

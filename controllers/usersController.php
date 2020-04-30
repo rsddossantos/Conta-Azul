@@ -1,7 +1,5 @@
 <?php
-
-class homeController extends controller{
-
+class usersController extends controller {
     public function __construct() {
         //parent::__construct();
 
@@ -11,20 +9,23 @@ class homeController extends controller{
             exit;
         }
     }
-
-    public function index(){
-        $data=array();
+    public function index() {
+        $data = array();
         $u = new Users();
         $u->setLoggedUser();
         $company = new Companies($u->getCompany());
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
-        $pcontrol = new permissionsController();
-        $data['menu']=$pcontrol->disableMenu();
-        $this->loadTemplate('home', $data);
+        if($u->hasPermission('users_view')) {
+
+            $pcontrol = new permissionsController();
+            $data['menu']=$pcontrol->disableMenu();
+            $this->loadTemplate('users', $data);
+        } else {
+            header("Location: ".BASE_URL);
+        }
     }
 
 
+
 }
-
-

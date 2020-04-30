@@ -84,7 +84,10 @@ body {
 .menuarea li:nth-child(2) {
     background-image:url('../images/key.png');
 }
-.menuarea li:nth-child(2) [data-menu="disabled"] {
+.menuarea li:nth-child(3) {
+    background-image:url('../images/user.png');
+}
+.menuarea li [data-menu="disabled"] {
     color:#666;
     cursor:not-allowed;
     font-style:italic;
