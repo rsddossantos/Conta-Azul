@@ -68,5 +68,24 @@ class Users extends model {
             return true;
         }
     }
+    public function getList($id_company) {
+        $data = array();
+        $sql = $this->db->prepare("
+        SELECT
+            u.id,
+            u.email,
+            p.name 
+        FROM users u
+        LEFT JOIN permission_groups p ON p.id = u.id_group 
+        WHERE u.id_company = :id_company");
+        $sql->bindValue(':id_company', $id_company);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data = $sql->fetchAll();
+        }
+        return $data;
+    }
+    public function add() {
 
+    }
 }
