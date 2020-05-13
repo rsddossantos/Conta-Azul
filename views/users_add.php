@@ -1,4 +1,9 @@
 <h1>Usuários - Adicionar</h1>
+
+<?php if(isset($error_msg) && !empty($error_msg)): ?>
+<div class="warn"><?php echo $error_msg; ?></div>
+<?php  endif; ?>
+
 <form method="POST">
     <label for="email">E-mail</label><br/>
     <input type="email" name="email" required /><br/><br/>

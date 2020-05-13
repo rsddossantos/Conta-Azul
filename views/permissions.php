@@ -15,12 +15,8 @@
                 <tr>
                     <td><?php echo $p['name']; ?></td>
                     <td width="160">
-                        <div class="button button_small">
-                            <a href="<?php echo BASE_URL; ?>/permissions/edit_group/<?php echo $p['id']; ?>">Editar</a>
-                        </div>
-                        <div class="button button_small">
-                            <a href="<?php echo BASE_URL; ?>/permissions/delete_group/<?php echo $p['id']; ?>" onclick="return confirm('Deseja realmente excluir esse item?')">Excluir</a>
-                        </div>
+                        <a class="button button_small" href="<?php echo BASE_URL; ?>/permissions/edit_group/<?php echo $p['id']; ?>">Editar</a>
+                        <a class="button button_small" href="<?php echo BASE_URL; ?>/permissions/delete_group/<?php echo $p['id']; ?>" onclick="return confirm('Deseja realmente excluir esse item?')">Excluir</>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -37,9 +33,7 @@
             <tr>
                 <td><?php echo $p['name']; ?></td>
                 <td width="50">
-                    <div class="button button_small">
-                        <a href="<?php echo BASE_URL; ?>/permissions/delete/<?php echo $p['id']; ?>" onclick="return confirm('Deseja realmente excluir esse item?')">Excluir</a>
-                    </div>
+                    <a class="button button_small" href="<?php echo BASE_URL; ?>/permissions/delete/<?php echo $p['id']; ?>" onclick="return confirm('Deseja realmente excluir esse item?')">Excluir</a>
                 </td>
             </tr>
             <?php endforeach; ?>
