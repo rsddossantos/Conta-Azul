@@ -1,21 +1,22 @@
 body {
     margin:0;
-    background-color:#DDD;
+    background-image:url("../images/fundo.png");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size:100%;
+    -webkit-box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.5);
 }
 .logo_company {
     height:130px;
-    background-color:#DDD;
     text-align:center;
-    margin-bottom:20px;
     border-radius:10px;
+    padding-bottom:10px;
 }
 .logo_company img {
-    margin-top:15px;
-    width:100px;
-    height:100px;
-    box-shadow:0px 0px 10px #999;
-    border-radius:10px;
-    color:#DDD;
+    width:150px;
+    height:100%;
 }
 .loginarea {
     width:300px;
@@ -26,7 +27,9 @@ body {
     margin-left:-150px;
     margin-top:-200px;
     border-radius:10px;
-    box-shadow:0px 0px 10px #999;
+    -webkit-box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.75);
     border:1px solid #CCC;
     padding:10px;
 }
