@@ -38,9 +38,10 @@ body {
 }
 .top {
     height:40px;
-    background-color:#232830;
+    background-color:#1f232a;
     color:#FFF;
     font-size:15px;
+    opacity:0.93;
 }
 .top_right {
     float:right;
@@ -85,6 +86,9 @@ body {
     background-image:url('../images/key.png');
 }
 .menuarea li:nth-child(3) {
+    background-image:url('../images/user.png');
+}
+.menuarea li:nth-child(4) {
     background-image:url('../images/user.png');
 }
 .menuarea li [data-menu="disabled"] {

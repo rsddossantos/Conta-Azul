@@ -31,14 +31,15 @@ class permissionsController extends controller {
     /*
      * Método que irá desabilitar os menus de acordo com as permissões
      * Esse método deverá ser chamado em toda Action que carregar View
-     * Menu Permissões >> permissions_view >> ID=2
-     * Menu Usuários >> users_disabled >> ID=32
      */
     public function disableMenu() {
         $data = array();
         $u = new Users();
         $u->setLoggedUser();
-        $permissions = array('permissions_view','users_view');
+        $permissions = array(
+            'permissions_view',
+            'users_view',
+            'clients_view');
         foreach ($permissions as $permission) {
             if($u->hasPermission($permission)) {
                 continue;
@@ -49,6 +50,9 @@ class permissionsController extends controller {
                         break;
                     case 'users_view':
                         $data['users_disabled'] = 'disabled';
+                        break;
+                    case 'clients_view':
+                        $data['clients_disabled'] = 'disabled';
                         break;
                 }
             }

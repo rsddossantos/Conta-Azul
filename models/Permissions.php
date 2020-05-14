@@ -36,7 +36,7 @@ class Permissions extends model {
     }
     public function getList($id_company) {
         $data = array();
-        $sql = $this->db->prepare("SELECT * FROM permission_params WHERE id_company =:id_company");
+        $sql = $this->db->prepare("SELECT * FROM permission_params WHERE id_company =:id_company ORDER BY name");
         $sql->bindValue(":id_company", $id_company);
         $sql->execute();
         if($sql->rowCount() > 0) {
