@@ -44,17 +44,7 @@ class permissionsController extends controller {
             if($u->hasPermission($permission)) {
                 continue;
             } else {
-                switch($permission) {
-                    case 'permissions_view':
-                        $data['permissions_disabled'] = 'disabled';
-                        break;
-                    case 'users_view':
-                        $data['users_disabled'] = 'disabled';
-                        break;
-                    case 'clients_view':
-                        $data['clients_disabled'] = 'disabled';
-                        break;
-                }
+                $data[$permission] = 'disabled';
             }
         }
         return $data;
@@ -74,6 +64,7 @@ class permissionsController extends controller {
                 $permissions->add($pname, $u->getCompany());
                 header("Location: ".BASE_URL."/permissions");
             }
+            $data['menu'] = $this->disableMenu();
             $this->loadTemplate('permissions_add', $data);
         } else {
             header("Location: ".BASE_URL);

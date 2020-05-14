@@ -16,9 +16,9 @@
             <div class="menuarea">
                 <ul>
                     <li><a href="<?php echo BASE_URL; ?>">Home</a></li>
-                    <li><a href="<?php echo BASE_URL; ?>/permissions" data-menu="<?php echo $viewData['menu']['permissions_disabled']; ?>">Permissões</a></li>
-                    <li ><a href="<?php echo BASE_URL; ?>/users" data-menu="<?php echo $viewData['menu']['users_disabled']; ?>">Usuários</a></li>
-                    <li ><a href="<?php echo BASE_URL; ?>/clients" data-menu="<?php echo $viewData['menu']['clients_disabled']; ?>">Clientes</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>/permissions" data-menu="<?php echo $viewData['menu']['permissions_view']; ?>">Permissões</a></li>
+                    <li ><a href="<?php echo BASE_URL; ?>/users" data-menu="<?php echo $viewData['menu']['users_view']; ?>">Usuários</a></li>
+                    <li ><a href="<?php echo BASE_URL; ?>/clients" data-menu="<?php echo $viewData['menu']['clients_view']; ?>">Clientes</a></li>
                 </ul>
             </div>
         </div>
