@@ -6,7 +6,7 @@
 
 <form method="POST">
     <label for="email">E-mail</label><br/>
-    <b><?php echo $user_info['email']; ?></b><br/><br/>
+    <?php echo $user_info['email']; ?><br/><br/>
     <label for="password">Senha</label><br/>
     <input type="password" name="password" /><br/><br/>
     <label for="group">Grupo de Permissões</label><br/>
