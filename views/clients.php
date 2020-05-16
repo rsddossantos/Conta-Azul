@@ -12,12 +12,17 @@
     </tr>
     <?php foreach($clients_list as $c): ?>
     <tr>
-        <td><?php echo $c['name']; ?></td>
-        <td><?php echo $c['phone']; ?></td>
-        <td><?php echo $c['address_city']; ?></td>
-        <td><?php echo $c['stars']; ?></td>
-        <td>
-
+        <td width="400"><?php echo $c['name']; ?></td>
+        <td width="150"><?php echo $c['phone']; ?></td>
+        <td width="300"><?php echo $c['address_city']; ?></td>
+        <td width="10" style="text-align:center"><?php echo $c['stars']; ?></td>
+        <td width="160" style="text-align:center">
+            <?php if($edit_permission): ?>
+                <a class="button button_small" href="<?php echo BASE_URL; ?>/clients/edit/<?php echo $c['id']; ?>">Editar</a>
+                <a class="button button_small" href="<?php echo BASE_URL; ?>/clients/delete/<?php echo $c['id']; ?>" onclick="return confirm('Deseja realmente excluir esse item?')">Excluir</a>
+            <?php else: ?>
+                <a class="button button_small" href="<?php echo BASE_URL; ?>/clients/view/<?php echo $c['id']; ?>">Visualizar</a>
+            <?php endif; ?>
         </td>
     </tr>
     <?php endforeach; ?>

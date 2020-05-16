@@ -70,9 +70,13 @@ body {
     background-size:13px 13px;
     background-repeat: no-repeat;
     background-position:14px 12.5px;
+    transition:all ease 0.1s;
 }
 .menuarea li:hover {
     background-color:#000;
+    background-size:17px 17px;
+    font-size:17px;
+    background-position:14px 9.5px;
 }
 .menuarea li a {
     color:#EEE;
@@ -89,7 +93,7 @@ body {
     background-image:url('../images/user.png');
 }
 .menuarea li:nth-child(4) {
-    background-image:url('../images/user.png');
+    background-image:url('../images/stars.png');
 }
 .menuarea li [data-menu="disabled"] {
     color:#666;
@@ -162,6 +166,7 @@ button,
     border-radius:3px;
     padding-left:20px;
     padding-right:20px;
+    margin-bottom:2px;
     cursor:pointer;
     font-size:13px;
     display: inline-block;

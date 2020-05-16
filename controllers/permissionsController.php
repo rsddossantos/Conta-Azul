@@ -42,7 +42,7 @@ class permissionsController extends controller {
             'clients_view');
         foreach ($permissions as $permission) {
             if($u->hasPermission($permission)) {
-                continue;
+                $data[$permission] = 'enabled';
             } else {
                 $data[$permission] = 'disabled';
             }
