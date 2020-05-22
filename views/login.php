@@ -12,7 +12,7 @@
             </div>
             <input type="email" name="email" placeholder="Digite seu e-mail"/>
             <input type="password" name="password" placeholder="Digite sua senha"/>
-            <input type="submit" value="Entrar" />
+            <input class="button" type="submit" value="Entrar" />
 
             <?php if(isset($error) && !empty($error)): ?>
             <div class="warning"><?php echo $error; ?></div>

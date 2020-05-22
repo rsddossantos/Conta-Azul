@@ -2,6 +2,7 @@
 <?php if($edit_permission): ?>
 <div class="button"><a href="<?php echo BASE_URL; ?>/clients/add" class="button">Adicionar Cliente</a></div>
 <?php endif; ?>
+<input type="text" id="busca" placeholder="Buscar" />
 <table border="0" width="100%">
     <tr>
         <th>Nome</th>
@@ -27,3 +28,10 @@
     </tr>
     <?php endforeach; ?>
 </table>
+
+<div class="pagination">
+<?php for($q=1;$q<=$p_count;$q++): ?>
+    <a class="pag_item <?php echo ($q==$p)?'pag_ativo':''; ?>" href="<?php echo BASE_URL; ?>/clients?p=<?php echo $q; ?>"><?php echo $q; ?></a>
+<?php endfor; ?>
+    <div style="clear:both"></div>
+</div>

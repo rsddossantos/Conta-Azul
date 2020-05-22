@@ -211,5 +211,35 @@ table td {
     margin-top:20px;
     margin-bottom:20px;
 }
+.pagination {
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.pag_item  {
+    width:20px;
+    height:20px;
+    float:left;
+    border:1px solid #000;
+    margin-right: 3px;
+    text-align: center;
+    line-height: 20px;
+    color:#000;
+    text-decoration: none;
 
+}
+.pag_ativo {
+    background-color:#224074;
+    color:#FFF;
+}
+#busca{
+    width:100px;
+    float:right;
+    background-image:url('../images/search.png');
+    background-repeat: no-repeat;
+    background-size:23px 23px;
+    background-position: 5px;
+    padding-left: 35px;
+    border-radius:5px;
+    border:1px solid #CCC;
+}
 

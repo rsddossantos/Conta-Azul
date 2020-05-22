@@ -4,9 +4,9 @@ body {
     background-position: top center;
     background-repeat: no-repeat;
     background-size:100%;
-    -webkit-box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.5);
-    -moz-box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.5);
-    box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.6);
+    -moz-box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.6);
+    box-shadow: inset 0px 0px 0px 400px rgba(0,0,0,0.6);
 }
 .logo_company {
     height:130px;
@@ -41,22 +41,28 @@ body {
     font-size:16px;
     padding-left:10px;
     padding-right:10px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     border-radius:5px;
     border:1px solid #CCC;
 }
-.loginarea input[type=submit] {
-    width:100px;
-    height:40px;
-    border:0px;
-    font-size:16px;
-    border-radius:5px;
-    background-color:#DDD;
-    border:1px solid #CCC;
+.button {
+    border: 0px;
+    background-color: #224074;
+    color: #FFF;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 2px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-block;
 }
 .warning {
     border:2px solid #FF0000;
     padding:10px;
+    padding-bottom:5px;
     border-radius:5px;
     background-color:#FF9999;
     color:#FFF;

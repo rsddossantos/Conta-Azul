@@ -24,6 +24,17 @@ class Clients extends model {
         return $data;
     }
 
+    public function getCount($id_company) {
+        $r = 0;
+
+        $sql = $this->db->prepare("SELECT COUNT(*) as c FROM clients WHERE id_company = :id_company");
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
+        $row = $sql->fetch();
+        $r = $row['c'];
+        return $r;
+    }
+
     public function add($id_company, $name, $email,$phone,$stars,$internal_obs,$address_zipcode,$address,
                     $address_number,$address2,$address_neighb,$address_city,$address_state,$address_country) {
 
