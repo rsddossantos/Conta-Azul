@@ -112,5 +112,15 @@ class Clients extends model {
         $sql->execute();
     }
 
+    public function searchClientByName($name, $id_company) {
+        $data = array();
+        $sql = $this->db->prepare("SELECT name, id FROM clients WHERE name LIKE :name");
+        $sql->bindValue(":name", "%{$name}%");
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data = $sql->fetchAll();
+        }
+        return $data;
+    }
 
 }

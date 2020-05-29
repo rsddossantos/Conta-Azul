@@ -2,7 +2,7 @@
 <?php if($edit_permission): ?>
 <div class="button"><a href="<?php echo BASE_URL; ?>/clients/add" class="button">Adicionar Cliente</a></div>
 <?php endif; ?>
-<input type="text" id="busca" placeholder="Buscar" />
+<input type="text" id="busca" data-type="search_clients" placeholder="Buscar" autocomplete="off"/>
 <table border="0" width="100%">
     <tr>
         <th>Nome</th>
