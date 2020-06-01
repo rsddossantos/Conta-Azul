@@ -242,4 +242,23 @@ table td {
     border-radius:5px;
     border:1px solid #CCC;
 }
-
+.searchresults {
+    width:248px;
+    background-color:#FFF;
+    position:absolute;
+    border:1px solid #CCC;
+}
+.si {
+    height:30px;
+    line-height:30px;
+    padding-left:10px;
+    cursor:pointer
+}
+.si a {
+    color:#000;
+    text-decoration:none;
+    display:block
+}
+.si:hover {
+    background-color:#EEE;
+}

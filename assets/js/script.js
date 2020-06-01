@@ -17,6 +17,9 @@ $(function(){
                 width: '100px'
             }, 'fast');
         }
+        setTimeout(function(){
+            $('.searchresults').hide();
+        },500);
     });
     $('#busca').on('keyup', function(){
         var datatype = $(this).attr('data-type');
@@ -28,7 +31,17 @@ $(function(){
                 data:{q:q},
                 dataType:'json',
                 success:function(json) {
-
+                    if( $('.searchresults').length == 0 ) {
+                        $('#busca').after('<div class="searchresults"></div>')
+                    }
+                    $('.searchresults').css('left', $('#busca').offset().left+'px');
+                    $('.searchresults').css('top', $('#busca').offset().top+$('#busca').height()+3+'px');
+                    var html = '<div class="si" style="font-style:italic;font-size:13px;color:#a9a9a9">Primeiros 10 registros...</div>';
+                    for(var i in json) {
+                        html += '<div class="si"><a href="'+json[i].link+'">'+json[i].id+' - '+json[i].name+'</a></div>';
+                    }
+                    $('.searchresults').html(html);
+                    $('.searchresults').show();
                 }
             });
         }
