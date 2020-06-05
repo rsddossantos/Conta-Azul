@@ -39,7 +39,8 @@ class permissionsController extends controller {
         $permissions = array(
             'permissions_view',
             'users_view',
-            'clients_view');
+            'clients_view',
+            'inventory_view');
         foreach ($permissions as $permission) {
             if($u->hasPermission($permission)) {
                 $data[$permission] = 'enabled';

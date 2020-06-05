@@ -95,6 +95,9 @@ body {
 .menuarea li:nth-child(4) {
     background-image:url('../images/stars.png');
 }
+.menuarea li:nth-child(5) {
+    background-image:url('../images/inventory.png');
+}
 .menuarea li [data-menu="disabled"] {
     color:#666;
     cursor:not-allowed;
@@ -102,9 +105,6 @@ body {
 }
 .area {
     padding:15px;
-}
-h1 {
-    margin-bottom:35px;
 }
 .tabarea {
     height:40px;
@@ -122,7 +122,6 @@ h1 {
     border-bottom:1px solid #c0c0c0;
     border-top-right-radius:10px;
     border-top-left-radius:10px;
-    transition:all ease 0.3s;
 }
 .activetab {
     background-color:#FFF;
@@ -137,6 +136,11 @@ h1 {
 }
 label{
     font-weight: bold
+}
+input[disabled],
+select[disabled],
+textarea[disabled]{
+    cursor:not-allowed;
 }
 input[type=text],
 input[type=email],
@@ -166,7 +170,6 @@ button,
     border-radius:3px;
     padding-left:20px;
     padding-right:20px;
-    margin-bottom:5px;
     cursor:pointer;
     font-size:13px;
     display: inline-block;
@@ -212,8 +215,8 @@ table td {
     margin-bottom:20px;
 }
 .pagination {
-    margin-top:30px;
-    margin-bottom:30px;
+    margin-top:20px;
+    margin-bottom:20px;
 }
 .pag_item  {
     width:20px;
