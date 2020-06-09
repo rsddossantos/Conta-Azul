@@ -7,17 +7,23 @@
     <tr>
         <th>Nome</th>
         <th>Preço</th>
-        <th>Quantidade</th>
-        <th>Quant. Min.</th>
+        <th>Qtde.</th>
+        <th>Qtde. Min.</th>
         <th>Ações</th>
     </tr>
     <?php foreach($inventory_list as $product): ?>
         <tr>
             <td><?php echo $product['name']; ?></td>
-            <td><?php echo number_format($product['price'], 2); ?></td>
-            <td><?php echo $product['quant']; ?></td>
-            <td><?php echo $product['min_quant']; ?></td>
-            <td></td>
+            <td width="280">R$ <?php echo number_format($product['price'], 2); ?></td>
+            <td width="100" style="text-align:center"><?php echo $product['quant']; ?></td>
+            <td width="100" style="text-align:center"><?php
+                if($product['min_quant'] > $product['quant']) {
+                    echo '<span style="color:red">'.($product['min_quant']).'</span>';
+                } else {
+                    echo $product['min_quant'];
+                }
+                ?></td>
+            <td width="180"></td>
         </tr>
 
     <?php endforeach ?>
