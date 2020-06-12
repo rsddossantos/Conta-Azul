@@ -21,18 +21,40 @@ class ajaxController extends controller {
             $clients = $c->searchClientByName($q, $u->getCompany());
             foreach($clients as $citem) {
                 $arr = explode(' ', $citem['name']);
-                $twoNames = $arr[0].' '.$arr[1];
+                array_push($arr, '', '');
+                $threeNames = $arr[0].' '.$arr[1].' '.$arr[2];
                 $data[] = array(
                     'id' => $citem['id'],
-                    'name' => $twoNames,
+                    'name' => $threeNames,
                     'link' => BASE_URL.'/clients/edit/'.$citem['id']
                 );
             }
         }
-
-
         echo json_encode($data);
-
-
     }
+
+    public function search_inventory() {
+        $data = array();
+        $u = new Users();
+        $u->setLoggedUser();
+        $i = new Inventory();
+        if(isset($_GET['q']) && !empty($_GET['q'])) {
+            $q = addslashes($_GET['q']);
+            $products = $i->searchInventoryByName($q, $u->getCompany());
+            foreach($products as $product) {
+                $arr = explode(' ', $product['name']);
+                array_push($arr, '', '');
+                $threeNames = $arr[0].' '.$arr[1].' '.$arr[2];
+                $data[] = array(
+                    'id' => $product['id'],
+                    'name' => $threeNames,
+                    'link' => BASE_URL.'/inventory/edit/'.$product['id']
+                );
+            }
+        }
+        echo json_encode($data);
+    }
+
+
+
 }

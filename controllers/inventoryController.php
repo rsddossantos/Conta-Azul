@@ -19,7 +19,17 @@ class inventoryController extends controller {
         if ($u->hasPermission('inventory_view')) {
             $i = new Inventory();
             $offset = 0;
+            $data['p'] = 1;
+            if(isset($_GET['p']) && !empty($_GET['p'])) {
+                $data['p'] = intval($_GET['p']);
+                if($data['p'] == 0) {
+                    $data['p'] = 1;
+                }
+            }
+            $offset = ( 10 * ($data['p']-1) );
             $data['inventory_list'] = $i->getList($offset, $u->getCompany());
+            $data['inventory_count'] = $i->getCount($u->getCompany());
+            $data['p_count'] = ceil( $data['inventory_count'] /10 );
             $data['edit_permission'] = $u->hasPermission('inventory_edit');
             $pcontrol = new permissionsController();
             $data['menu'] = $pcontrol->disableMenu();

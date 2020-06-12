@@ -24,6 +24,16 @@ class Inventory extends model {
         return $data;
     }
 
+    public function getCount($id_company) {
+        $r = 0;
+        $sql = $this->db->prepare("SELECT COUNT(*) as c FROM inventory WHERE id_company = :id_company");
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
+        $row = $sql->fetch();
+        $r = $row['c'];
+        return $r;
+    }
+
     public function setLog($id_product, $id_company, $id_user, $action) {
         $sql = $this->db->prepare("INSERT INTO inventory_history SET id_company=:id_company,id_product=:id_product,id_user=:id_user,action=:action,date_action=NOW()");
         $sql->bindValue(":id_company", $id_company);
@@ -64,6 +74,17 @@ class Inventory extends model {
         $sql->bindValue(":id_company", $id_company);
         $sql->execute();
         $this->setLog($id, $id_company, $id_user, 'del');
+    }
+
+    public function searchInventoryByName($name, $id_company) {
+        $data = array();
+        $sql = $this->db->prepare("SELECT name, id FROM inventory WHERE name LIKE :name LIMIT 10");
+        $sql->bindValue(":name", "%{$name}%");
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data = $sql->fetchAll();
+        }
+        return $data;
     }
 
 }
