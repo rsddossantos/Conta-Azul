@@ -31,6 +31,7 @@ class permissionsController extends controller {
     /*
      * Método que irá desabilitar os menus de acordo com as permissões
      * Esse método deverá ser chamado em toda Action que carregar View
+     * Toda permissão de View deverá ser incrementada neste array.
      */
     public function disableMenu() {
         $data = array();
