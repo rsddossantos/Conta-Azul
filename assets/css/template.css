@@ -40,7 +40,7 @@ body {
     height:40px;
     background-color:#1f232a;
     color:#FFF;
-    font-size:15px;
+    font-size:17px;
     opacity:0.93;
 }
 .top_right {
@@ -63,20 +63,20 @@ body {
     list-style:none;
 }
 .menuarea li {
-    height:40px;
-    line-height:40px;
-    font-size:15px;
-    padding-left:40px;
-    background-size:13px 13px;
+    height:50px;
+    line-height:50px;
+    font-size:17px;
+    padding-left:55px;
+    background-size:19px 19px;
     background-repeat: no-repeat;
-    background-position:14px 12.5px;
+    background-position:16px 14px;
     transition:all ease 0.1s;
 }
 .menuarea li:hover {
     background-color:#000;
-    background-size:17px 17px;
-    font-size:17px;
-    background-position:14px 9.5px;
+    background-size:22px 22px;
+    font-size:19px;
+    background-position:19px 13px;
 }
 .menuarea li a {
     color:#EEE;
