@@ -17,6 +17,10 @@ class salesController extends controller {
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
         if ($u->hasPermission('sales_view')) {
+            $s = new Sales();
+            $offset = 0;
+
+            $data['sales_list'] = $s->getList($offset, $u->getCompany());
 
             $pcontrol = new permissionsController();
             $data['menu'] = $pcontrol->disableMenu();
