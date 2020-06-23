@@ -16,15 +16,45 @@ class salesController extends controller {
         $company = new Companies($u->getCompany());
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
+        // Array com o status do pedido deverá ser igual ao select do view sales_add
+        $data['statuses'] = array(
+            '0' => 'Aguardando Pgto.',
+            '1' => 'Pago',
+            '2' => 'Cancelado'
+        );
         if ($u->hasPermission('sales_view')) {
             $s = new Sales();
             $offset = 0;
-
             $data['sales_list'] = $s->getList($offset, $u->getCompany());
-
             $pcontrol = new permissionsController();
             $data['menu'] = $pcontrol->disableMenu();
             $this->loadTemplate('sales', $data);
+        } else {
+            header("Location: " . BASE_URL);
+        }
+    }
+
+    public function add() {
+        $data = array();
+        $u = new Users();
+        $u->setLoggedUser();
+        $company = new Companies($u->getCompany());
+        $data['company_name'] = $company->getName();
+        $data['user_email'] = $u->getEmail();
+        if ($u->hasPermission('sales_view')) {
+            $s = new Sales();
+            if(isset($_POST['client_id']) && !empty($_POST['client_id'])) {
+                $client_id = addslashes($_POST['client_id']);
+                $status = addslashes($_POST['status']);
+                $total_price = addslashes($_POST['total_price']);
+                $total_price = str_replace('.','', $total_price);
+                $total_price = str_replace(',','.', $total_price);
+                $s->addSale($u->getCompany(), $client_id, $u->getId(), $total_price, $status);
+                header("Location: " . BASE_URL . "/sales");
+            }
+            $pcontrol = new permissionsController();
+            $data['menu'] = $pcontrol->disableMenu();
+            $this->loadTemplate('sales_add', $data);
         } else {
             header("Location: " . BASE_URL);
         }

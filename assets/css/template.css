@@ -269,3 +269,16 @@ table td {
 .si:hover {
     background-color:#EEE;
 }
+#client_name {
+    width:250px;
+    float: left;
+}
+.add_button {
+    font-size:25px;
+    height:30px;
+    line-height:26px;
+    display:block;
+    float:left;
+    margin-top:5px;
+    margin-left:10px;
+}

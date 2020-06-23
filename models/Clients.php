@@ -34,8 +34,8 @@ class Clients extends model {
         return $r;
     }
 
-    public function add($id_company, $name, $email,$phone,$stars,$internal_obs,$address_zipcode,$address,
-                    $address_number,$address2,$address_neighb,$address_city,$address_state,$address_country) {
+    public function add($id_company, $name, $email=null,$phone=null,$stars='3',$internal_obs=null,$address_zipcode=null,$address=null,
+                    $address_number=null,$address2=null,$address_neighb=null,$address_city=null,$address_state=null,$address_country=null) {
 
         $sql = $this->db->prepare("
         INSERT INTO 
@@ -70,6 +70,7 @@ class Clients extends model {
         $sql->bindValue(":address_state", $address_state);
         $sql->bindValue(":address_country", $address_country);
         $sql->execute();
+        return $this->db->lastInsertId();
     }
 
     public function edit($id,$id_company, $name, $email,$phone,$stars,$internal_obs,$address_zipcode,$address,
