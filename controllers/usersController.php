@@ -86,7 +86,12 @@ class usersController extends controller {
         $data['user_email'] = $u->getEmail();
         if($u->hasPermission('users_view')) {
             $u->delete($id, $u->getCompany());
-            header("Location: ".BASE_URL."/users");
+            if($_SESSION['ccUser'] == $id ) {
+                $u->logout();
+                header("Location: ".BASE_URL."/login");
+            } else {
+                header("Location: " . BASE_URL . "/users");
+            }
         } else {
             header("Location: ".BASE_URL);
         }
