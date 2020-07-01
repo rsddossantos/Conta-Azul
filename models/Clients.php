@@ -114,8 +114,9 @@ class Clients extends model {
 
     public function searchClientByName($name, $id_company) {
         $data = array();
-        $sql = $this->db->prepare("SELECT name, id FROM clients WHERE name LIKE :name LIMIT 10");
+        $sql = $this->db->prepare("SELECT name, id FROM clients WHERE name LIKE :name AND id_company = :id_company LIMIT 10");
         $sql->bindValue(":name", "%{$name}%");
+        $sql->bindValue(":id_company", $id_company);
         $sql->execute();
         if($sql->rowCount() > 0) {
             $data = $sql->fetchAll();

@@ -48,6 +48,7 @@ class ajaxController extends controller {
                 $data[] = array(
                     'id' => $product['id'],
                     'name' => $threeNames,
+                    'price' => $product['price'],
                     'link' => BASE_URL.'/inventory/edit/'.$product['id']
                 );
             }

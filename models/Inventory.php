@@ -3,7 +3,7 @@ class Inventory extends model {
 
     public function getList($offset, $id_company) {
         $data = array();
-        $sql = $this->db->prepare("SELECT * FROM inventory WHERE id_company = :id_company LIMIT $offset, 10");
+        $sql = $this->db->prepare("SELECT * FROM inventory WHERE id_company = :id_company ORDER BY name LIMIT $offset, 10");
         $sql->bindValue(":id_company", $id_company);
         $sql->execute();
         if($sql->rowCount() > 0) {
@@ -78,8 +78,9 @@ class Inventory extends model {
 
     public function searchInventoryByName($name, $id_company) {
         $data = array();
-        $sql = $this->db->prepare("SELECT name, id FROM inventory WHERE name LIKE :name LIMIT 10");
+        $sql = $this->db->prepare("SELECT name, price, id FROM inventory WHERE name LIKE :name AND id_company = :id_company LIMIT 10");
         $sql->bindValue(":name", "%{$name}%");
+        $sql->bindValue(":id_company", $id_company);
         $sql->execute();
         if($sql->rowCount() > 0) {
             $data = $sql->fetchAll();

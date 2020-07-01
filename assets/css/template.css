@@ -250,7 +250,7 @@ table td {
     border:1px solid #CCC;
 }
 .searchresults {
-    width:248px;
+    min-width:248px;
     background-color:#FFF;
     position:absolute;
     border:1px solid #CCC;
@@ -259,6 +259,7 @@ table td {
     height:30px;
     line-height:30px;
     padding-left:10px;
+    padding-right:10px;
     cursor:pointer
 }
 .si a {
@@ -281,4 +282,7 @@ table td {
     float:left;
     margin-top:5px;
     margin-left:10px;
+}
+.p_quant {
+    width:60px !important;
 }
