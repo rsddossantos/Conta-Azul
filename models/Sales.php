@@ -27,6 +27,8 @@ class Sales extends model {
     }
 
     public function addSale($id_company, $id_client, $id_user, $quant, $status) {
+        $i = new Inventory();
+
         $sql = $this->db->prepare("
             INSERT INTO 
                 sales 
@@ -71,6 +73,10 @@ class Sales extends model {
                 $sql_prod->bindValue(":quant", $quant_prod);
                 $sql_prod->bindValue(":sale_price", $price);
                 $sql_prod->execute();
+
+                // Baixa no estoque
+                $i->downInventory($id_prod, $id_company, $quant_prod, $id_user);
+
                 $total_price += round($price * $quant_prod, 2);
             }
         }
@@ -79,6 +85,47 @@ class Sales extends model {
         $sql->bindValue(":id", $id_sale);
         $sql->bindValue(":id_company", $id_company);
         $sql->execute();
+    }
+
+    public function getInfo($id, $id_company) {
+        $data = array();
+        $sql = $this->db->prepare("
+            SELECT 
+                *,
+                (select clients.name from clients where clients.id = sales.id_client) as client_name
+            FROM 
+                sales 
+            WHERE 
+                id = :id AND 
+                id_company = :id_company");
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data['info'] = $sql->fetch();
+        }
+
+        $sql = $this->db->prepare("
+            SELECT 
+                sal.quant,
+                sal.sale_price,
+                inv.name
+            FROM 
+                sales_products sal
+            LEFT JOIN inventory inv ON
+                 inv.id = sal.id_product AND
+                 inv.id_company = inv.id_company
+            WHERE 
+                sal.id_sale = :id_sale AND 
+                sal.id_company = :id_company");
+        $sql->bindValue(":id_sale", $id);
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data['products'] = $sql->fetchAll();
+        }
+
+        return $data;
     }
 
 

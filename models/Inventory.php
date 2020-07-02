@@ -88,4 +88,12 @@ class Inventory extends model {
         return $data;
     }
 
+    public function downInventory($id_prod, $id_company, $quant_prod, $id_user) {
+        $sql = $this->db->prepare("UPDATE inventory SET quant = quant - $quant_prod WHERE id = :id AND id_company = :id_company");
+        $sql->bindValue(":id", $id_prod);
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
+        $this->setLog($id_prod, $id_company, $id_user, 'dwn');
+    }
+
 }

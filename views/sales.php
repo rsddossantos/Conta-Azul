@@ -4,11 +4,11 @@
 
 <table border="0" width="100%">
     <tr>
-        <th>Nome do cliente</th>
-        <th>Data</th>
-        <th>Status</th>
-        <th>Valor</th>
-        <th>Ações</th>
+        <th width="400">Nome do cliente</th>
+        <th width="200">Data</th>
+        <th width="200">Status</th>
+        <th width="200">Valor</th>
+        <th width="100">Ações</th>
     </tr>
     <?php foreach($sales_list as $sale_item): ?>
     <tr>
@@ -22,7 +22,9 @@
             }
             ?></td>
         <td>R$ <?php echo number_format($sale_item['total_price'], 2, ',', '.'); ?></td>
-        <td></td>
+        <td style="text-align:center">
+            <a class="button button_small" href="<?php echo BASE_URL; ?>/sales/edit/<?php echo $sale_item['id']; ?>">Editar</a>
+        </td>
     </tr>
     <?php endforeach; ?>
 </table>
