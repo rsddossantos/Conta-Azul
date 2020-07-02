@@ -26,7 +26,7 @@ class Sales extends model {
         return $data;
     }
 
-    public function addSale($id_company, $id_client, $id_user, $total_price, $status) {
+    public function addSale($id_company, $id_client, $id_user, $quant, $status) {
         $sql = $this->db->prepare("
             INSERT INTO 
                 sales 
@@ -41,8 +41,43 @@ class Sales extends model {
         $sql->bindValue(":id_company", $id_company);
         $sql->bindValue(":id_client", $id_client);
         $sql->bindValue(":id_user", $id_user);
-        $sql->bindValue(":total_price", $total_price);
+        $sql->bindValue(":total_price", '0');
         $sql->bindValue(":status", $status);
+        $sql->execute();
+        $id_sale = $this->db->lastInsertId();
+
+        $total_price = 0;
+        foreach($quant as $id_prod => $quant_prod) {
+            $sql = $this->db->prepare("SELECT price FROM inventory WHERE id = :id AND id_company = :id_company");
+            $sql->bindValue(":id", $id_prod);
+            $sql->bindValue(":id_company", $id_company);
+            $sql->execute();
+            if($sql->rowCount() > 0) {
+                $row = $sql->fetch();
+                $price = $row['price'];
+                $sql_prod = $this->db->prepare("
+                  INSERT INTO 
+                   sales_products 
+                  SET 
+                    id_company = :id_company,
+                    id_sale = :id_sale,
+                    id_product = :id_product,
+                    quant = :quant,
+                    sale_price = :sale_price                
+                ");
+                $sql_prod->bindValue(":id_company", $id_company);
+                $sql_prod->bindValue(":id_sale", $id_sale);
+                $sql_prod->bindValue(":id_product", $id_prod);
+                $sql_prod->bindValue(":quant", $quant_prod);
+                $sql_prod->bindValue(":sale_price", $price);
+                $sql_prod->execute();
+                $total_price += round($price * $quant_prod, 2);
+            }
+        }
+        $sql = $this->db->prepare("UPDATE sales SET total_price = :total_price WHERE id = :id AND id_company = :id_company");
+        $sql->bindValue(":total_price", $total_price);
+        $sql->bindValue(":id", $id_sale);
+        $sql->bindValue(":id_company", $id_company);
         $sql->execute();
     }
 

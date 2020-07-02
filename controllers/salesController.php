@@ -46,10 +46,8 @@ class salesController extends controller {
             if(isset($_POST['client_id']) && !empty($_POST['client_id'])) {
                 $client_id = addslashes($_POST['client_id']);
                 $status = addslashes($_POST['status']);
-                $total_price = addslashes($_POST['total_price']);
-                $total_price = str_replace('.','', $total_price);
-                $total_price = str_replace(',','.', $total_price);
-                $s->addSale($u->getCompany(), $client_id, $u->getId(), $total_price, $status);
+                $quant = $_POST['quant'];
+                $s->addSale($u->getCompany(), $client_id, $u->getId(), $quant, $status);
                 header("Location: " . BASE_URL . "/sales");
             }
             $pcontrol = new permissionsController();

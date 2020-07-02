@@ -14,7 +14,7 @@ function addProd(obj) {
     if( $('input[name="quant['+id+']"]').length == 0 ) {
         var tr = '<tr>' +
             '<td>' + name + '</td>' +
-            '<td style="text-align:right"><input type="number" name="quant[' + id + ']" class="p_quant" value="1" onchange="updateSubtotal(this)" data-price="' + price + '" />&nbsp&nbspX</td>' +
+            '<td style="text-align:right"><input type="number" name="quant[' + id + ']" class="p_quant" value="1" onchange="updateSubtotal(this)" data-price="' + price + '" /></td>' +
             '<td>R$ ' + parseFloat(price).toFixed(2) + '</td>' +
             '<td class="subtotal">R$ ' + parseFloat(price).toFixed(2) + '</td>' +
             '<td style="text-align:center"><a class="button button_small" href="javascript:;" onclick="excluirProd(this)">Excluir</a></td>' +
