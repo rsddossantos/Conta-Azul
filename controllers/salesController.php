@@ -65,6 +65,12 @@ class salesController extends controller {
         $company = new Companies($u->getCompany());
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
+        // Array com o status do pedido deverá ser igual ao select do view sales_add
+        $data['statuses'] = array(
+            '0' => 'Aguardando Pgto.',
+            '1' => 'Pago',
+            '2' => 'Cancelado'
+        );
         if ($u->hasPermission('sales_view')) {
             $s = new Sales();
             if(isset($_POST['client_id']) && !empty($_POST['client_id'])) {
@@ -74,9 +80,8 @@ class salesController extends controller {
                 $s->addSale($u->getCompany(), $client_id, $u->getId(), $quant, $status);
                 header("Location: " . BASE_URL . "/sales");
             }
-
             $data['sales_info'] = $s->getInfo($id, $u->getCompany());
-
+            $data['permission_edit'] = $u->hasPermission('sales_edit');
             $pcontrol = new permissionsController();
             $data['menu'] = $pcontrol->disableMenu();
             $this->loadTemplate('sales_edit', $data);
