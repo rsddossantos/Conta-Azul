@@ -22,6 +22,7 @@
                     <li ><a href="<?php echo BASE_URL; ?>/clients" data-menu="<?php echo $viewData['menu']['clients_view']; ?>">Clientes</a></li>
                     <li ><a href="<?php echo BASE_URL; ?>/inventory" data-menu="<?php echo $viewData['menu']['inventory_view']; ?>">Estoque</a></li>
                     <li ><a href="<?php echo BASE_URL; ?>/sales" data-menu="<?php echo $viewData['menu']['sales_view']; ?>">Vendas</a></li>
+                    <li ><a href="<?php echo BASE_URL; ?>/report" data-menu="<?php echo $viewData['menu']['report_view']; ?>">Relatórios</a></li>
                 </ul>
             </div>
         </div>

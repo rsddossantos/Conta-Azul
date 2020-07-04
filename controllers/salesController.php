@@ -24,8 +24,17 @@ class salesController extends controller {
         );
         if ($u->hasPermission('sales_view')) {
             $s = new Sales();
-            $offset = 0;
+            $offset = 0;$data['p'] = 1;
+            if(isset($_GET['p']) && !empty($_GET['p'])) {
+                $data['p'] = intval($_GET['p']);
+                if($data['p'] == 0) {
+                    $data['p'] = 1;
+                }
+            }
+            $offset = ( 10 * ($data['p']-1) );
             $data['sales_list'] = $s->getList($offset, $u->getCompany());
+            $data['sales_count'] = $s->getCount($u->getCompany());
+            $data['p_count'] = ceil( $data['sales_count'] /10 );
             $pcontrol = new permissionsController();
             $data['menu'] = $pcontrol->disableMenu();
             $this->loadTemplate('sales', $data);
@@ -73,15 +82,13 @@ class salesController extends controller {
         );
         if ($u->hasPermission('sales_view')) {
             $s = new Sales();
-            if(isset($_POST['client_id']) && !empty($_POST['client_id'])) {
-                $client_id = addslashes($_POST['client_id']);
+            $data['permission_edit'] = $u->hasPermission('sales_edit');
+            if(isset($_POST['status']) && $data['permission_edit']) {
                 $status = addslashes($_POST['status']);
-                $quant = $_POST['quant'];
-                $s->addSale($u->getCompany(), $client_id, $u->getId(), $quant, $status);
+                $s->changeStatus($status, $id, $u->getCompany());
                 header("Location: " . BASE_URL . "/sales");
             }
             $data['sales_info'] = $s->getInfo($id, $u->getCompany());
-            $data['permission_edit'] = $u->hasPermission('sales_edit');
             $pcontrol = new permissionsController();
             $data['menu'] = $pcontrol->disableMenu();
             $this->loadTemplate('sales_edit', $data);

@@ -28,3 +28,10 @@
     </tr>
     <?php endforeach; ?>
 </table>
+
+<div class="pagination">
+    <?php for($q=1;$q<=$p_count;$q++): ?>
+        <a class="pag_item <?php echo ($q==$p)?'pag_ativo':''; ?>" href="<?php echo BASE_URL; ?>/sales?p=<?php echo $q; ?>"><?php echo $q; ?></a>
+    <?php endfor; ?>
+    <div style="clear:both"></div>
+</div>

@@ -26,6 +26,16 @@ class Sales extends model {
         return $data;
     }
 
+    public function getCount($id_company) {
+        $r = 0;
+        $sql = $this->db->prepare("SELECT COUNT(*) as s FROM sales WHERE id_company = :id_company");
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
+        $row = $sql->fetch();
+        $r = $row['s'];
+        return $r;
+    }
+
     public function addSale($id_company, $id_client, $id_user, $quant, $status) {
         $i = new Inventory();
 
@@ -126,6 +136,15 @@ class Sales extends model {
         }
 
         return $data;
+    }
+
+    public function changeStatus($status, $id, $id_company) {
+        // status CANCELADO não vai retornar estoque por enquanto
+        $sql = $this->db->prepare("UPDATE sales SET status = :status WHERE id = :id AND id_company = :id_company");
+        $sql->bindValue(":status", $status);
+        $sql->bindValue(":id", $id);
+        $sql->bindValue(":id_company", $id_company);
+        $sql->execute();
     }
 
 
