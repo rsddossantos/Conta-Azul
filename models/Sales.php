@@ -147,6 +147,64 @@ class Sales extends model {
         $sql->execute();
     }
 
+    public function getSalesFiltered($client_name, $period1, $period2, $status, $order, $id_company) {
+        $data = array();
+        $sql = "
+            SELECT
+                clients.id,
+                clients.name,
+                sales.date_sale,
+                sales.status,
+                sales.total_price  
+            FROM sales
+            LEFT JOIN clients 
+                ON clients.id = sales.id_client
+                AND clients.id_company = sales.id_company 
+            WHERE 
+            ";
+        $where = array();
+        $where[] = "sales.id_company = :id_company";
+        if(!empty($client_name)) {
+            $where[] = "clients.name LIKE '%".$client_name."%'";
+        }
+        if(!empty($period1) && !empty($period2)) {
+            $where[] = "sales.date_sale BETWEEN :period1 AND :period2";
+        }
+        if($status != '') {
+            $where[] = "sales.status = :status";
+        }
+        $sql .= implode(' AND ', $where);
+        switch($order) {
+            case 'date_desc':
+            default:
+                $sql .= " ORDER BY sales.date_sale DESC";
+                break;
+            case 'date_asc':
+                $sql .= " ORDER BY sales.date_sale ASC";
+                break;
+            case 'status':
+                $sql .= " ORDER BY sales.status";
+                break;
+            case 'client':
+                $sql .= " ORDER BY clients.id";
+                break;
+        }
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id_company", $id_company);
+        if(!empty($period1) && !empty($period2)) {
+            $sql->bindValue(":period1", $period1);
+            $sql->bindValue(":period2", $period2);
+        }
+        if($status != '') {
+            $sql->bindValue(":status", $status);
+        }
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $data = $sql->fetchAll();
+        }
+        return $data;
+    }
+
 
 
 }

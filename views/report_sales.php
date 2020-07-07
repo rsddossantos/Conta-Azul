@@ -13,7 +13,7 @@
     <div class="report-grid-4">
         <label for="status">Status da Venda:</label><br/>
         <select name="status">
-            <option value="0">Todos</option>
+            <option value="">Todos</option>
             <?php foreach($statuses as $key => $value): ?>
             <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
             <?php endforeach; ?>
@@ -23,8 +23,9 @@
         <label for="order">Organizar:</label><br/>
         <select name="order">
             <option value="date_desc">Mais Recente</option>
-            <option value="date_esc">Mais Antigo</option>
+            <option value="date_asc">Mais Antigo</option>
             <option value="status">Status da Venda</option>
+            <option value="client">Cliente</option>
         </select><br/><br/>
     </div>
     <div style="clear:both"></div>
