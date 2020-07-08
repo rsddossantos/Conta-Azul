@@ -1,5 +1,23 @@
 <style type="text/css">
-    th { text-align:left; }
+    table {
+        margin-top:10px;
+    }
+    table th {
+        height:40px;
+        line-height:40px;
+        background-color:#DDD;
+        text-align:left;
+        padding-left:10px;
+        padding-right:10px;
+    }
+    table td {
+        height:40px;
+        line-height:40px;
+        background-color:#EEE;
+        text-align:left;
+        padding-left:10px;
+        padding-right:10px;
+    }
 </style>
 
 <h1>Relatório de Vendas</h1>
@@ -7,14 +25,14 @@
 <fieldset>
     <?php
     if (isset($filters['client_name']) && !empty($filters['client_name'])) {
-        echo "Filtrado com cliente: ".$filters['client_name']."<br/>";
-    }
+        echo "Cliente: <strong>".$filters['client_name']."</strong><br/>";
+    } else {echo "Cliente: TODOS<br/>";}
     if (isset($filters['period1']) && !empty($filters['period2'])) {
-        echo "No período: ".date('d/m/Y', strtotime($filters['period1']))." a ".date('d/m/Y', strtotime($filters['period2']))."<br/>";
-    }
+        echo "Período: <strong>".date('d/m/Y', strtotime($filters['period1']))." a ".date('d/m/Y', strtotime($filters['period2']))."</strong><br/>";
+    } else {echo "Período: TODOS<br/>";}
     if ($filters['status'] != '') {
-        echo "Filtrado com status: ".$statuses[$filters['status']];
-    }
+        echo "Status Venda: <strong>".$statuses[$filters['status']]."</strong>";
+    } else {echo "Status Venda: TODOS";}
     ?>
 </fieldset><br/>
 
