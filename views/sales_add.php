@@ -29,7 +29,7 @@
     <select name="status" id="status">
         <option value="0">Aguardando Pgto.</option>
         <option value="1">Pago</option>
-        <option value="2">Cancelado</option>
+        <option value="2" disabled="disabled">Cancelado</option>
     </select><br/><br/>
 
     <label for="total_price">Total</label><br/>

@@ -19,6 +19,14 @@ class homeController extends controller{
         $company = new Companies($u->getCompany());
         $data['company_name'] = $company->getName();
         $data['user_email'] = $u->getEmail();
+
+        $s = new Sales();
+
+        $data['products_sold'] = $s->getSoldProducts(date('Y-m-d', strtotime('-30 days')), date('Y-m-d'), $u->getCompany());
+        $data['revenue'] = $s->getTotalRevenue(date('Y-m-d', strtotime('-30 days')), date('Y-m-d'), $u->getCompany());
+        $data['expenses'] = $s->getTotalExpenses(date('Y-m-d', strtotime('-30 days')), date('Y-m-d'), $u->getCompany());
+
+
         $pcontrol = new permissionsController();
         $data['menu']=$pcontrol->disableMenu();
         $this->loadTemplate('home', $data);

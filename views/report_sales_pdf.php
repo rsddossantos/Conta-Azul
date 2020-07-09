@@ -24,6 +24,7 @@
 
 <fieldset>
     <?php
+    $total = 0;
     if (isset($filters['client_name']) && !empty($filters['client_name'])) {
         echo "Cliente: <strong>".$filters['client_name']."</strong><br/>";
     } else {echo "Cliente: TODOS<br/>";}
@@ -58,5 +59,10 @@
                 ?></td>
             <td>R$ <?php echo number_format($sale_item['total_price'], 2, ',', '.'); ?></td>
         </tr>
+    <?php $total += number_format($sale_item['total_price'], 2, '.', ''); ?>
     <?php endforeach; ?>
+    <tr>
+        <td colspan="4" style="text-align:right"><b>TOTAL</b></td>
+        <td><b>R$ <?php echo number_format($total, 2, ',', '.'); ?></b></td>
+    </tr>
 </table>

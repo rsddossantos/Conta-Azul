@@ -65,22 +65,17 @@ class reportController extends controller
             $period2 = addslashes($_GET['period2']);
             $status = addslashes($_GET['status']);
             $order = addslashes($_GET['order']);
-
             $s = new Sales();
             $data['sales_list'] = $s->getSalesFiltered($client_name, $period1, $period2, $status, $order, $u->getCompany());
             $data['filters'] = $_GET;
-
             $this->loadLibrary('mpdf/vendor/autoload');
-
             ob_start();
             $this->loadView('report_sales_pdf', $data);
             $html = ob_get_contents();
             ob_end_clean();
-
             $mpdf = new \Mpdf\Mpdf();
             $mpdf->WriteHTML($html);
             $mpdf->Output();
-
         } else {
             header("Location: " . BASE_URL);
         }
