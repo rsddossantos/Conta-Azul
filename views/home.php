@@ -31,12 +31,15 @@
     <div class="grid-1">
         <div class="db-info">
             <div class="db-info-title">Status Vendas (d-30)</div>
-            <div class="db-info-body">
-                <canvas id="rel2" height="312"></canvas>
+            <div class="db-info-body" style="padding-bottom:25px">
+                <canvas id="rel2" height="300"></canvas>
             </div>
         </div>
     </div>
 </div>
 
+<script type="text/javascript">
+    var days_list = <?php echo json_encode($days_list); ?>;
+</script>
 <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/Chart.min.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/script_home.js"></script>

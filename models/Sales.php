@@ -251,4 +251,26 @@ class Sales extends model {
         return $int;
     }
 
+    public function getRevenueList($period1, $period2, $id_company) {
+        $data = array();
+        $sql = "SELECT date_sale,SUM(total_price) as total 
+                FROM sales 
+                WHERE id_company = :id_company 
+                    AND date_sale BETWEEN :period1 AND :period2 
+                    AND status <> 2
+                GROUP BY DATE_FORMAT(date_sale,'%Y-%m-%d')";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id_company', $id_company);
+        $sql->bindValue(':period1', $period1);
+        $sql->bindValue(':period2', $period2);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $rows = $sql->fetchAll();
+            foreach($rows as $sales_item) {
+                $data[$sales_item['date_sale']] = $sales_item['total'];
+            }
+        }
+        return $data;
+    }
+
 }

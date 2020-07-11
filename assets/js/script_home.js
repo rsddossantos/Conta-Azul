@@ -2,7 +2,7 @@ $(function(){
     var rel1 = new Chart(document.getElementById("rel1"), {
         type:'line',
         data:{
-            labels:['02/07', '03/07', '04/07', '05/07'],
+            labels:days_list,
             datasets:[{
                 label:'Receita',
                 data:[5, 6, 9, 3],
@@ -21,7 +21,7 @@ $(function(){
     });
 
     var rel2 = new Chart(document.getElementById("rel2"), {
-        type:'bar',
+        type:'pie',
         data:{
             labels:['Pago', 'Cancelado', 'Aguardando Pgto.'],
             datasets:[{
