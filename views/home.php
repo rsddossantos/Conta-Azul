@@ -40,6 +40,7 @@
 
 <script type="text/javascript">
     var days_list = <?php echo json_encode($days_list); ?>;
+    var revenue_list = <?php echo json_encode($revenue_list); ?>;
 </script>
 <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/Chart.min.js"></script>
 <script type="text/javascript" src="<?php echo BASE_URL; ?>/assets/js/script_home.js"></script>

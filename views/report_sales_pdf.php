@@ -57,9 +57,15 @@
                     echo $statuses[$sale_item['status']];
                 }
                 ?></td>
-            <td>R$ <?php echo number_format($sale_item['total_price'], 2, ',', '.'); ?></td>
+            <td>R$ <?php
+                if($sale_item['status']=='2'){
+                    echo number_format($sale_item['total_price']*-1, 2, ',', '.');
+                } else {
+                    echo number_format($sale_item['total_price'], 2, ',', '.');
+                }
+                ?></td>
         </tr>
-    <?php $total += number_format($sale_item['total_price'], 2, '.', ''); ?>
+    <?php $total += $sale_item['status'] == '2' ? 0 : number_format($sale_item['total_price'], 2, '.', ''); ?>
     <?php endforeach; ?>
     <tr>
         <td colspan="4" style="text-align:right"><b>TOTAL</b></td>

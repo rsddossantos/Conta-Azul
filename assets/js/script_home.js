@@ -5,7 +5,7 @@ $(function(){
             labels:days_list,
             datasets:[{
                 label:'Receita',
-                data:[5, 6, 9, 3],
+                data:revenue_list,
                 fill:false,
                 backgroundColor:'#224074',
                 borderColor:'#224074'

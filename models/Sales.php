@@ -253,7 +253,12 @@ class Sales extends model {
 
     public function getRevenueList($period1, $period2, $id_company) {
         $data = array();
-        $sql = "SELECT date_sale,SUM(total_price) as total 
+        $currentDay = $period1;
+        while($period2 != $currentDay) {
+            $data[$currentDay] = 0;
+            $currentDay = date('Y-m-d', strtotime('+1 day', strtotime($currentDay)));
+        }
+        $sql = "SELECT DATE_FORMAT(date_sale,'%Y-%m-%d') as date_sale,SUM(total_price) as total 
                 FROM sales 
                 WHERE id_company = :id_company 
                     AND date_sale BETWEEN :period1 AND :period2 
