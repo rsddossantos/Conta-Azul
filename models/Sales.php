@@ -278,4 +278,58 @@ class Sales extends model {
         return $data;
     }
 
+    // colocar no módulo de compras quando criado
+    public function getExpensesList($period1, $period2, $id_company) {
+        $data = array();
+        $currentDay = $period1;
+        while($period2 != $currentDay) {
+            $data[$currentDay] = 0;
+            $currentDay = date('Y-m-d', strtotime('+1 day', strtotime($currentDay)));
+        }
+        $sql = "SELECT DATE_FORMAT(date_purchase,'%Y-%m-%d') as date_purchase,SUM(total_price) as total 
+                FROM purchases 
+                WHERE id_company = :id_company 
+                    AND date_purchase BETWEEN :period1 AND :period2 
+                GROUP BY DATE_FORMAT(date_purchase,'%Y-%m-%d')";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id_company', $id_company);
+        $sql->bindValue(':period1', $period1);
+        $sql->bindValue(':period2', $period2);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $rows = $sql->fetchAll();
+            foreach($rows as $sales_item) {
+                $data[$sales_item['date_purchase']] = $sales_item['total'];
+            }
+        }
+        return $data;
+    }
+
+    public function getQuantStatusList($period1, $period2, $id_company) {
+        $data = array(
+            '0' => 0,
+            '1' => 0,
+            '2' => 0
+        );
+        $sql = "SELECT COUNT(id) as total, status
+                FROM sales 
+                WHERE id_company = :id_company 
+                    AND date_sale BETWEEN :period1 AND :period2 
+                GROUP BY status
+                ORDER BY status ASC";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(':id_company', $id_company);
+        $sql->bindValue(':period1', $period1);
+        $sql->bindValue(':period2', $period2);
+        $sql->execute();
+        if($sql->rowCount() > 0) {
+            $rows = $sql->fetchAll();
+            foreach($rows as $sales_item) {
+                $data[$sales_item['status']] = $sales_item['total'];
+            }
+        }
+        return $data;
+    }
+
+
 }

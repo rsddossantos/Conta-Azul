@@ -1,4 +1,8 @@
 $(function(){
+    var simulation = [];
+    for(i=0; i<30; i++) {
+        simulation.push(Math.round(Math.random()*1000));
+    }
     var rel1 = new Chart(document.getElementById("rel1"), {
         type:'line',
         data:{
@@ -12,7 +16,8 @@ $(function(){
             },
                 {
                     label:'Despesas',
-                    data:[400, 700, 400, 800,1500,1000,100,0,0,0,0,0,0,0,0,0,1200,1900,1400,0,0,400,0,0,0,0,500,0,0,500],
+                    // Dados de COMPRAS simulado, para efeito de visualização do gráfico
+                    data:expenses_list,
                     fill:false,
                     backgroundColor:'#d11507',
                     borderColor:'#d11507'
@@ -23,11 +28,11 @@ $(function(){
     var rel2 = new Chart(document.getElementById("rel2"), {
         type:'pie',
         data:{
-            labels:['Pago', 'Cancelado', 'Aguardando Pgto.'],
+            labels:status_name_list,
             datasets:[{
                 label:['Número de Vendas'],
-                data: [7, 4, 6],
-                backgroundColor: ['#224074', '#d11507', '#ffd700'],
+                data: status_list,
+                backgroundColor: ['#ffd700', '#224074', '#d11507'],
             }]
         }
     });
