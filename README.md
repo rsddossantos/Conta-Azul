@@ -1,4 +1,4 @@
-#Mini ERP Conta-Azul
+# Mini ERP Conta-Azul
 
 Instalação:<br>
 Estrutura e dados no arquivo \BKPcontaazul.sql, fazer download do arquivo para o servidor de banco de dados MySQL.<br>
