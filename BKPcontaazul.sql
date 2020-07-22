@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 12-Jul-2020 às 04:32
+-- Tempo de geração: 22-Jul-2020 às 03:59
 -- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 7.3.12
 
@@ -135,9 +135,9 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 
 INSERT INTO `inventory` (`id`, `id_company`, `name`, `price`, `quant`, `min_quant`) VALUES
 (8, 1, 'TÃªnis Oasis', 239.9, -2, 20),
-(9, 1, 'Bermuda BlueSky Flyhorse Memories', 69.9, 488, 520),
-(10, 1, 'CalÃ§a Jeans OverLock', 100, 74, 100),
-(36, 1, 'Bermuda Chong Lee', 105.99, 3, 10),
+(9, 1, 'Bermuda BlueSky Flyhorse Memories', 69.9, 483, 520),
+(10, 1, 'CalÃ§a Jeans OverLock', 100, 62, 100),
+(36, 1, 'Bermuda Chong Lee', 105.99, -2, 10),
 (39, 1, 'teste preÃ§o zero 2', 1, 12, 12),
 (40, 1, 'teste', 1, 0, 1),
 (37, 1, 'CalÃ§a Moleton HeyJoe', 123.73, 87, 100),
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `inventory_history` (
   `action` varchar(3) NOT NULL,
   `date_action` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `inventory_history`
@@ -258,7 +258,11 @@ INSERT INTO `inventory_history` (`id`, `id_company`, `id_product`, `id_user`, `a
 (95, 1, 9, 1, 'dwn', '2020-07-11 01:35:58'),
 (96, 1, 10, 1, 'dwn', '2020-07-11 01:35:58'),
 (97, 1, 37, 1, 'dwn', '2020-07-11 01:35:58'),
-(98, 1, 40, 1, 'dwn', '2020-07-11 01:35:58');
+(98, 1, 40, 1, 'dwn', '2020-07-11 01:35:58'),
+(99, 1, 10, 1, 'dwn', '2020-07-12 01:49:50'),
+(100, 1, 9, 1, 'dwn', '2020-07-12 01:49:50'),
+(101, 1, 36, 1, 'dwn', '2020-07-13 18:36:12'),
+(102, 1, 10, 1, 'dwn', '2020-07-14 17:26:26');
 
 -- --------------------------------------------------------
 
@@ -326,15 +330,16 @@ CREATE TABLE IF NOT EXISTS `purchases` (
   `date_purchase` datetime NOT NULL,
   `total_price` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `purchases`
 --
 
 INSERT INTO `purchases` (`id`, `id_company`, `id_user`, `date_purchase`, `total_price`) VALUES
-(1, 1, 1, '2020-07-08 18:13:48', 100),
-(2, 1, 1, '2020-07-03 00:00:00', 100);
+(1, 1, 1, '2020-07-08 18:13:48', 350),
+(2, 1, 1, '2020-07-03 00:00:00', 500),
+(3, 1, 1, '2020-06-25 00:00:00', 750);
 
 -- --------------------------------------------------------
 
@@ -369,18 +374,18 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `total_price` float NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `sales`
 --
 
 INSERT INTO `sales` (`id`, `id_company`, `id_client`, `id_user`, `date_sale`, `total_price`, `status`) VALUES
-(14, 1, 16, 1, '2020-07-02 01:02:15', 4709.7, 0),
-(15, 1, 4, 1, '2020-07-02 16:28:37', 20849.5, 1),
+(14, 1, 16, 1, '2020-07-02 01:02:15', 4709.7, 2),
+(15, 1, 4, 1, '2020-07-02 16:28:37', 20849.5, 2),
 (16, 1, 3, 1, '2020-07-02 16:29:12', 650, 0),
 (13, 1, 4, 1, '2020-07-02 01:01:53', 375.19, 0),
-(17, 1, 16, 1, '2020-07-02 17:39:34', 1529.95, 1),
+(17, 1, 16, 1, '2020-07-02 17:39:34', 1529.95, 2),
 (18, 1, 3, 1, '2020-07-02 23:28:18', 279.6, 0),
 (19, 1, 39, 1, '2020-07-02 23:45:21', 494.92, 2),
 (20, 1, 3, 1, '2020-07-03 18:01:51', 1171.58, 2),
@@ -389,12 +394,15 @@ INSERT INTO `sales` (`id`, `id_company`, `id_client`, `id_user`, `date_sale`, `t
 (23, 1, 5, 1, '2020-07-03 18:07:51', 100, 2),
 (24, 1, 7, 1, '2020-07-03 18:09:22', 69.9, 1),
 (25, 1, 16, 1, '2020-07-03 18:09:35', 69.9, 2),
-(26, 1, 16, 1, '2020-07-03 18:09:44', 69.9, 0),
+(26, 1, 16, 1, '2020-07-03 18:09:44', 69.9, 1),
 (27, 1, 4, 1, '2020-07-03 18:09:53', 1, 1),
 (28, 1, 40, 1, '2020-07-03 18:17:06', 929.4, 1),
 (29, 1, 4, 1, '2020-07-08 18:05:12', 100, 1),
 (30, 1, 3, 1, '2020-07-11 01:26:32', 618.65, 1),
-(31, 1, 22, 1, '2020-07-11 01:35:58', 765.82, 2);
+(31, 1, 22, 1, '2020-07-11 01:35:58', 765.82, 1),
+(32, 1, 6, 1, '2020-07-12 01:49:50', 749.5, 1),
+(33, 1, 3, 1, '2020-07-13 18:36:12', 529.95, 1),
+(34, 1, 3, 1, '2020-07-14 17:26:26', 800, 1);
 
 -- --------------------------------------------------------
 
@@ -411,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `sales_products` (
   `quant` int(11) NOT NULL,
   `sale_price` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `sales_products`
@@ -444,7 +452,11 @@ INSERT INTO `sales_products` (`id`, `id_company`, `id_sale`, `id_product`, `quan
 (36, 1, 31, 9, 1, 69.9),
 (37, 1, 31, 10, 2, 100),
 (38, 1, 31, 37, 4, 123.73),
-(39, 1, 31, 40, 1, 1);
+(39, 1, 31, 40, 1, 1),
+(40, 1, 32, 10, 4, 100),
+(41, 1, 32, 9, 5, 69.9),
+(42, 1, 33, 36, 5, 105.99),
+(43, 1, 34, 10, 8, 100);
 
 -- --------------------------------------------------------
 
